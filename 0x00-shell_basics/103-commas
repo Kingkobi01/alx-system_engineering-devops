@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -acmp --sort=none
+ls -acmpv
