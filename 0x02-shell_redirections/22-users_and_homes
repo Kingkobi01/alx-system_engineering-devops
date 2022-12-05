@@ -1,2 +1,2 @@
 #!/bin/bash
-awk -F':' '{print $1,$7}' /etc/passwd | tr " " ":"
+cut -d ':' -f 1,7 /etc/passwd
