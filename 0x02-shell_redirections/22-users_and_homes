@@ -1,2 +1,2 @@
 #!/bin/bash
-cut -d ':' -f 1,666666/passwd | sort -d
+cut -d ':' -f 1,6 /passwd | sort -d
