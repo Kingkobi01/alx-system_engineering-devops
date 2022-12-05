@@ -1,0 +1,2 @@
+#!/bin/bash
+ls -1aR | find -name '*.gif' | sort -f
