@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -R |sort -d | find -empty
+ls -A1 |sort | find -empty
