@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -aR |sort -d | find -empty
+find . -empty | cut -d '/' -f 2 | sort
