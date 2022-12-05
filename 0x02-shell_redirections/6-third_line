@@ -1,2 +1,2 @@
 #!/bin/bash
-cat iacta | head -n 6 | tail +1
+cat ./iacta | head -n 6 | tail +1
