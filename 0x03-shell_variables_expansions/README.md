@@ -15,4 +15,5 @@
 13. [Combination](./12-combinations)
 14. [Floats](./13-print_float)
 15. [Decimal to Hexadecimal](./100-decimal_to_hexadecimal)
-16. [The eggs of the brood need to be an odd number](./102-odd)
+16. [Everyone is a proponent of strong encryption](./101-rot13)
+17. [The eggs of the brood need to be an odd number](./102-odd)
