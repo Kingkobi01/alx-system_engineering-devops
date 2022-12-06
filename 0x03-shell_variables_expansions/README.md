@@ -11,3 +11,4 @@
 9. [Every addition to true knowledge is an addition to human power](./8-true_knowledge)
 10. [DIvide and rule](./9-divide_and_rule)
 11. [Love is anterior to life, posterior to death, initial of creation, and the exponent of breath ](./10-love_exponent_breath)
+12. [There are 10 types of people in the world -- Those who understand binary, and those who don't](./11-binary_to_decimal)
