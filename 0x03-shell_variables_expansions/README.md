@@ -14,3 +14,4 @@
 12. [There are 10 types of people in the world -- Those who understand binary, and those who don't](./11-binary_to_decimal)
 13. [Combination](./12-combinations)
 14. [Floats](./13-print_float)
+15. [Decimal to Hexadecimal](./100-decimal_to_hexadecimal)
