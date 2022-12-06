@@ -5,3 +5,5 @@
 3. [The path to success is to take massive, determined action ](./2-path)
 4. [If the path be beautiful, let us not ask where it leads](./3-paths)
 5. [Global Variables](./4-global_variables)
+6. [Local Variables](./5-local_variables)
+7. [Local Variable](./6-create_local_variable)
