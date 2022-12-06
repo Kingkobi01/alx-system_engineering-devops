@@ -8,3 +8,4 @@
 6. [Local Variables](./5-local_variables)
 7. [Local Variable](./6-create_local_variable)
 8. [Global Variable](./7-create_global_variable)
+9. [Every addition to true knowledge is an addition to human power](./8-true_knowledge)
