@@ -7,3 +7,4 @@
 5. [Global Variables](./4-global_variables)
 6. [Local Variables](./5-local_variables)
 7. [Local Variable](./6-create_local_variable)
+8. [Global Variable](./7-create_global_variable)
