@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Dispays 'Best School' 10 times
+# Dispays 'Best School' 10 times using a for loop
 
 for _ in {1..10}; do
 	echo 'Best School'
