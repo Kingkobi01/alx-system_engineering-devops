@@ -11,10 +11,11 @@
 #   - if the file is a regular file: school is a regular file
 #   - if the file is not a regular file: (nothing)
 
-file=$1
+file='./school'
 
 if [ -e "$file" ]; then
 	echo  'school file exists'
+
 	if [ -s "$file" ]; then
 		echo 'school file is not empty'
 	elif [ ! -s "$file" ];then
