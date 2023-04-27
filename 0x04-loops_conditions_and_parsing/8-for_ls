@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Displays numbers from 1 to 20 and:
+# Displays:
 #
-#   - Displays 4 and then bad luck from China for the 4th loop iteration
-#   - Displays 9 and then bad luck from Japan for the 9th loop iteration
-#   - Displays 17 and then bad luck from Italy for the 17th loop iteration
+#   - The content of the current directory
+#   - In a list format
+#   - Where only the part of the name after the first dash is displayed
 
 content=$(find . | cut -d'-' -f2)
 
