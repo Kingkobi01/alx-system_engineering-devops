@@ -17,5 +17,4 @@ for i in {1..100}; do
 		echo "Buzz"
 	else echo "$i"
 	fi
-
 done
