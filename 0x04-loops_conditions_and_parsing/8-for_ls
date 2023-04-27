@@ -5,7 +5,7 @@
 #   - In a list format
 #   - Where only the part of the name after the first dash is displayed
 
-content=$(find . | cut -d'-' -f2)
+content=$(ls | cut -d'-' -f2)
 
 for file in $content; do
 	echo "$file"
