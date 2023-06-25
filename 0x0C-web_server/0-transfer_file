@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Transfers a file from our client to a server
+
+args=$#
+
+if [ $args -lt 3 ];then
+echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+
+else :
+
+path_file=$1
+ip=$2
+username=$3
+path_ssh_key=$4
+
+scp -i "$path_ssh_key" -o StrictHostKeyChecking=no "$path_file" "$username"@"$ip":"~/"
+fi
