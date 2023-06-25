@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# ssh client config file
+Host ubuntu
+  Hostname 18.206.202.81
+  User kwabena
+  IdentityFile ~/.ssh/id_rsa
