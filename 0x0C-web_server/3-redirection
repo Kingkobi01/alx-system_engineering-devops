@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Install a nginx web server listening on port 80.
+#
+# Also, when querying nginx at its root / with a GET
+# request, it returns a page that contains the string
+# 'Hello World!'.
+#
+# Also, the script, configure a directive of the Nginx server
+# to redirect to another page with 301 HTTP Code
+#
+
+find_text="as directory, then fall back to displaying a 404."
+redirect_url="https://www.youtube.com/watch?v=QH2-TGUlwu4"
+replace_text="$find_text\n\t\trewrite ^/redirect_me $redirect_url\ permanent;"
+
+sudo apt update
+sudo apt install -y nginx
+sudo ufw allow 'Nginx HTTP'
+sudo echo "Hello World" > /var/www/html/index.html
+sudo sed -i "s|$find_text|$replace_text|" /etc/nginx/sites-available/default
+sudo service nginx restart
