@@ -18,11 +18,11 @@ location_error="location = /404.html {\n\t\troot /var/www/html/;\n\t\tinternal;\
 error_directive="error_page 404 /404.html;\n\t$location_error"
 error_404="}\n\n\t$error_directive\t}"
 
-apt update
-apt install -y nginx
-ufw allow 'Nginx HTTP'
+sudo apt update
+sudo apt install -y nginx
+sudo ufw allow 'Nginx HTTP'
 echo "Hello World" > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
-sed -i "s|server_name\ _;|$new_conf|" /etc/nginx/sites-available/default
-sed -i "0,/}/ s|}|$error_404|" /etc/nginx/sites-available/default
-service nginx restart
+sudo sed -i "s|server_name\ _;|$new_conf|" /etc/nginx/sites-available/default
+sudo sed -i "0,/}/ s|}|$error_404|" /etc/nginx/sites-available/default
+sudo service nginx restart
