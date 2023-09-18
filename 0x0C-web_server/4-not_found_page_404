@@ -1,7 +1,32 @@
 #!/usr/bin/env bash
-# 404 Error page
+# Install an nginx web server listening on port 80.
+#
+# Also, when querying nginx at its root / with a GET
+# request, it returns a page that contains the string
+# 'Hello World!'.
+#
+# Also, the script configures a directive of the Nginx server
+# to redirect to another page with a 301 HTTP Code
+#
 
+# Error Page
+
+
+redirect_url="https://www.youtube.com/watch?v=QH2-TGUlwu4"
+findtext="server_name _;"
+replacetext="$findtext\n\trewrite ^/redirect_me/$ $redirect_url permanent;"
+
+
+
+echo "Hello World" > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+
+sudo sed -i "\#$findtext#c $replacetext" /etc/nginx/sites-available/default
+sudo service nginx restart
+
+
+
 
 find_text="# pass PHP scripts to FastCGI server"
 replace_text="error_page 404 /404.html;\n\tlocation = /404.html {\n\troot /var/www/html;\n\tinternal;\n\t}\n\t\n$find_text"

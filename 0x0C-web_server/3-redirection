@@ -9,15 +9,18 @@
 # to redirect to another page with a 301 HTTP Code
 #
 
+
+
+
 findtext="server_name _;"
 redirect_url="https://www.youtube.com/watch?v=QH2-TGUlwu4"
-replacetext="$findtext\n\trewrite ^/redirect_me $redirect_url permanent;"
+replacetext="$findtext\n\trewrite ^/redirect_me/$ $redirect_url permanent;"
 
 sudo apt update
 sudo apt install -y nginx
 sudo ufw allow 'Nginx HTTP'
 echo "Hello World" > /var/www/html/index.html
 
-# Use a different delimiter for sed to avoid conflicts
+
 sudo sed -i "\#$findtext#c $replacetext" /etc/nginx/sites-available/default
 sudo service nginx restart
