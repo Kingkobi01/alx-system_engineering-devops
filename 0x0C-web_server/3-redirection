@@ -16,7 +16,7 @@ replace_text="$find_text\n\t\trewrite ^/redirect_me $redirect_url\ permanent;"
 sudo apt update
 sudo apt install -y nginx
 sudo ufw allow 'Nginx HTTP'
-sudo echo "Hello World" > /var/www/html/index.html
+echo "Hello World" > /var/www/html/index.html
 sudo sed -i "s|$find_text|$replace_text|q" /etc/nginx/sites-available/default
 sudo service nginx restart
 
