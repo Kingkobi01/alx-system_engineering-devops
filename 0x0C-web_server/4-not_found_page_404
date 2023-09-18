@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# 404 Error page
+
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+find_text="# pass PHP scripts to FastCGI server"
+replace_text="error_page 404 /404.html;\n\tlocation = /404.html {\n\troot /var/www/html;\n\tinternal;\n\t}\n\t\n$find_text"
+
+sudo apt update
+sudo apt install -y nginx
+sudo ufw allow 'Nginx HTTP'
+echo "Hello World" > /var/www/html/index.html
+sudo sed -i "s|$find_text|$replace_text|" /etc/nginx/sites-available/default
+sudo service nginx restart
