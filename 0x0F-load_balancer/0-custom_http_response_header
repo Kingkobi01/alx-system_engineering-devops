@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Configure an nginx Server such that it contains a custom header
+# The name of the custom HTTP header must be X-Served-By
+# THe value of the custom HTTP header must be the hostname of the server nginx is runnung on
+
+
+sudo apt update
+hostname=$(cat /etc/hostname)
+find_text="# as directory, then fall back to displaying a 404."
+replace_text="$find_text\n\t\tadd_header X-Served-By $hostname;"
+sudo sed -i "s/$find_text/$replace_text/" /etc/nginx/sites-available/default
+
