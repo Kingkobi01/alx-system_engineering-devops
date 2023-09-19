@@ -9,4 +9,5 @@ hostname=$(cat /etc/hostname)
 find_text="# as directory, then fall back to displaying a 404."
 replace_text="$find_text\n\t\tadd_header X-Served-By $hostname;"
 sudo sed -i "s/$find_text/$replace_text/" /etc/nginx/sites-available/default
-
+sudo nginx -t
+sudo service nginx restart
