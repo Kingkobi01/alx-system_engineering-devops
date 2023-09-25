@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import csv
-import pprint
 import requests
 from sys import argv
 
