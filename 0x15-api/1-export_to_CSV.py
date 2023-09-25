@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import csv
+import pprint
 import requests
-import sys
+from sys import argv
 
 """
 Exports the data about the employee to a CSV file
@@ -14,50 +15,33 @@ def main():
     The Main Engine
     """
 
-    def get_user_info(user_id):
-        """
-        ...
-        Getting Employees Data
-        """
-        user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+    api_uri = "https://jsonplaceholder.typicode.com"
+    user_id = argv[1]
 
-        user_response = requests.get(user_url).json()
+    filename = f"{user_id}.csv"
 
-        user_name = user_response["name"]
+    user_uri = f"{api_uri}/users/{user_id}"
+    todo_uri = f"{api_uri}/todos/"
+    res = requests.get(user_uri).json()
 
-        todos_url = "https://jsonplaceholder.typicode.com/todos"
-        todos_response = requests.get(todos_url).json()
+    user_name = res.get('username')
 
-        user_todos = [todo for todo in todos_response if str(todo["userId"]) == user_id]
+    res = requests.get(todo_uri).json()
 
-        return user_todos, user_name
+    user_todos = [todo for todo in res if todo['userId']
+                  == int(user_id)]
 
-    def export_to_CSV_file():
-        """
-        ...
-        Exports it to a CSV File
-        """
-        user_todos = get_user_info(sys.argv[1])[0]
-        username = get_user_info(sys.argv[1])[1]
-
-        user_todos = [todo for todo in user_todos]
-
-        with open(f"{sys.argv[1]}.csv", "w") as csv_file:
-            field_names = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-            csv_writer = csv.DictWriter(csv_file, field_names)
-
-            for todo in user_todos:
-                csv_writer.writerow(
-                    {
-                        "USER_ID": todo["userId"],
-                        "USERNAME": username,
-                        "TASK_COMPLETED_STATUS": todo["completed"],
-                        "TASK_TITLE": todo["title"],
-                    }
-                )
-
-    export_to_CSV_file()
+    with open(filename, 'w') as csv_file:
+        csv_writer = csv.writer(csv_file)
+        for todo in user_todos:
+            status = todo.get('completed')
+            title = todo.get('title')
+            csv_writer.writerow([user_id, user_name, status, title])
 
 
 if __name__ == "__main__":
+    try:
+        int(argv[1])
+    except ValueError:
+        exit(1)
     main()
