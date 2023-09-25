@@ -5,42 +5,35 @@ from sys import argv
 
 
 def main():
-    # Define the base API URI for the JSONPlaceholder API
-    api_uri = "https://jsonplaceholder.typicode.com"
+    """
+    Export user's todo data to a CSV file.
+    This script retrieves user information and their to-do list from a REST API
+    and exports it to a CSV file named after the user's ID.
+    """
 
-    # Get the user ID from the command-line argument
-    user_id = argv[1]
+    api_uri = "https://jsonplaceholder.typicode.com"  # Base URI for the API
+    user_id = argv[1]  # User ID provided as a command-line argument
 
-    # Generate a filename for the CSV file using the user ID
+    # Generate the filename for the CSV file (e.g., '2.csv')
     filename = f"{user_id}.csv"
 
-    # Create the user URI by appending the user ID to the API URI
+    # Retrieve user information from the API
     user_uri = f"{api_uri}/users/{user_id}"
-
-    # Create the todos URI
     todo_uri = f"{api_uri}/todos/"
+    user_info = requests.get(user_uri).json()
 
-    # Send a GET request to the user URI and parse the JSON response
-    res = requests.get(user_uri).json()
+    # Extract user's username
+    user_name = user_info.get('username')
 
-    # Extract the username from the response
-    user_name = res.get('username')
+    # Retrieve all to-do items from the API
+    todos = requests.get(todo_uri).json()
 
-    # Send a GET request to the todos URI and parse the JSON response
-    res = requests.get(todo_uri).json()
+    # Filter to-do items for the specified user
+    user_todos = [todo for todo in todos if todo['userId'] == int(user_id)]
 
-    # Filter todos to get only those belonging to the specified user ID
-    user_todos = [todo for todo in res if todo['userId'] == int(user_id)]
-
-    # Open a CSV file with write mode using the generated filename
+    # Write user's to-do data to a CSV file
     with open(filename, 'w') as csv_file:
-        # Create a CSV writer
         csv_writer = csv.writer(csv_file)
-
-        # Write a header row to the CSV file
-        csv_writer.writerow(['User ID', 'Username', 'Status', 'Title'])
-
-        # Iterate through user todos and write each todo as a row in the CSV
         for todo in user_todos:
             status = todo.get('completed')
             title = todo.get('title')
@@ -48,12 +41,9 @@ def main():
 
 
 if __name__ == "__main__":
+    # Checks if the argument can be converted to an integer
     try:
-        # Check if the argument can be converted to an integer
         int(argv[1])
     except ValueError:
-        # If the argument is not a valid integer, exit the script with an error code
         exit(1)
-
-    # Call the main function
     main()
