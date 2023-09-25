@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """
-Export user's todo data to a CSV file.
+Export user's todo data to a JSON file.
 This script retrieves user information and their to-do list from a REST API
-and exports it to a CSV file named after the user's ID.
+and exports it to a JSON file named after the user's ID.
 """
 import json
 import requests
@@ -14,7 +14,7 @@ def main():
     api_uri = "https://jsonplaceholder.typicode.com"  # Base URI for the API
     user_id = argv[1]  # User ID provided as a command-line argument
 
-    # Generate the filename for the CSV file (e.g., '2.csv')
+    # Generate the filename for the JSON file (e.g., '2.json')
     filename = f"{user_id}.json"
 
     # Retrieve user information from the API
@@ -40,7 +40,7 @@ def main():
         task['username'] = user_name
         user_todos_for_json.append(task)
 
-    # Write user's to-do data to a CSV file
+    # Write user's to-do data to a JSON file
     with open(filename, 'w', encoding='utf-8', newline='') as json_file:
         json_data = {user_id: user_todos_for_json}
         json.dump(json_data, json_file)
