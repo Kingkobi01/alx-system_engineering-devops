@@ -2,20 +2,17 @@
 import csv
 import requests
 from sys import argv
-
-"""
-Exports the data about the employee to a CSV file
+"""Exports the data about the employee to a CSV file
 """
 
 
 def main():
-    """
-    ...
+    """...
     The Main Engine
     """
 
-    api_uri = "https://jsonplaceholder.typicode.com"
-    user_id = argv[1]
+    api_uri = "https://jsonplaceholder.typicode.com"  # uri
+    user_id = argv[1]  # id of user
 
     filename = f"{user_id}.csv"
 
@@ -23,7 +20,7 @@ def main():
     todo_uri = f"{api_uri}/todos/"
     res = requests.get(user_uri).json()
 
-    user_name = res.get('username')
+    user_name = res.get('username')  # username
 
     res = requests.get(todo_uri).json()
 
@@ -39,6 +36,7 @@ def main():
 
 
 if __name__ == "__main__":
+    # Checks if the argument can be converted to an integer
     try:
         int(argv[1])
     except ValueError:
