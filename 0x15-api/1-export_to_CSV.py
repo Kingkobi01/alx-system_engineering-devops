@@ -32,7 +32,7 @@ def main():
     user_todos = [todo for todo in todos if todo['userId'] == int(user_id)]
 
     # Write user's to-do data to a CSV file
-    with open(filename, 'w') as csv_file:
+    with open(filename, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         for todo in user_todos:
             status = todo.get('completed')
