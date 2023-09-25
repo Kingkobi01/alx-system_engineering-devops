@@ -1,15 +1,15 @@
 #!/usr/bin/python3
+"""
+Export user's todo data to a CSV file.
+This script retrieves user information and their to-do list from a REST API
+and exports it to a CSV file named after the user's ID.
+"""
 import csv
 import requests
 from sys import argv
 
 
 def main():
-    """
-    Export user's todo data to a CSV file.
-    This script retrieves user information and their to-do list from a REST API
-    and exports it to a CSV file named after the user's ID.
-    """
 
     api_uri = "https://jsonplaceholder.typicode.com"  # Base URI for the API
     user_id = argv[1]  # User ID provided as a command-line argument
