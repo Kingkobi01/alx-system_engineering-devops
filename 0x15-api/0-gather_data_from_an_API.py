@@ -12,8 +12,8 @@ if __name__ == '__main__':
         exit()
 
     api_url = 'https://jsonplaceholder.typicode.com'
-    user_uri = '{api}/users/{id}'.format(api=api_url, id=emp_id)
-    todo_uri = '{user_uri}/todos'.format(user_uri=user_uri)
+    user_uri = f'{api_url}/users/{emp_id}'
+    todo_uri = f'{user_uri}/todos'
 
     # User Response
     res = requests.get(user_uri).json()
@@ -34,10 +34,10 @@ if __name__ == '__main__':
     completed = total - non_completed
 
     # Formatting the expected output
-    str = "Employee {emp_name} is done with tasks({completed}/{total}):"
-    print(str.format(emp_name=name, completed=completed, total=total))
+    str = f"Employee {name} is done with tasks({completed}/{total}):"
+    print(str)
 
     # Printing completed tasks
     for elem in res:
         if elem.get('completed') is True:
-            print('\t', elem.get('title'))
+            print('\t ', elem.get('title'))
