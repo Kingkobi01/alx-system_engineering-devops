@@ -37,13 +37,13 @@ def main():
         task = {}
         task['task'] = todo.get('title')
         task['completed'] = todo.get('completed')
-        task['username'] = todo.get('username')
-        user_todos.append(task)
+        task['username'] = user_name
+        user_todos_for_json.append(task)
 
     # Write user's to-do data to a CSV file
     with open(filename, 'w', encoding='utf-8', newline='') as json_file:
         json_data = {user_id: user_todos_for_json}
-        json.dump(json_file, json_data)
+        json.dump(json_data, json_file)
 
 
 if __name__ == "__main__":
