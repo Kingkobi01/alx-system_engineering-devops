@@ -28,13 +28,15 @@ def main():
         todos_url = "https://jsonplaceholder.typicode.com/todos"
         todos_response = requests.get(todos_url).json()
 
-        user_todos = [todo for todo in todos_response if str(todo["userId"]) == user_id]
+        user_todos = [todo for todo in todos_response
+                      if str(todo["userId"]) == user_id]
 
         completed_tasks = [todo for todo in user_todos if todo["completed"]]
         total_todos = len(user_todos)
 
         print(
-            f"Employee {user_name} is done with tasks({len(completed_tasks)}/{total_todos}):"
+            f"Employee {user_name} is done with tasks({len\
+                (completed_tasks)}/{total_todos}):"
         )
 
         for todo in completed_tasks:
