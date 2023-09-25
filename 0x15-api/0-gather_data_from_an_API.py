@@ -1,49 +1,43 @@
-#!/usr/bin/env python3
-import pprint
+#!/usr/bin/python3
+"""Given an Employee ID, returns information
+about his/her TODO list progress.
+"""
 import requests
-import sys
+from sys import argv
 
-"""
-Gather data about an employee from an API
-"""
+if __name__ == '__main__':
+    try:
+        emp_id = int(argv[1])
+    except ValueError:
+        exit()
 
+    api_url = 'https://jsonplaceholder.typicode.com'
+    user_uri = '{api}/users/{id}'.format(api=api_url, id=emp_id)
+    todo_uri = '{user_uri}/todos'.format(user_uri=user_uri)
 
-def main():
-    """
-    ...
-    The Main Engine
-    """
+    # User Response
+    res = requests.get(user_uri).json()
 
-    def get_user_info(user_id):
-        """
-        ...
-        Getting Employees Data
-        """
-        user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
+    # Name of the employee
+    name = res.get('name')
 
-        user_response = requests.get(user_url).json()
+    # User TODO Response
+    res = requests.get(todo_uri).json()
 
-        user_name = user_response["name"]
+    # Total number of tasks, the sum of completed and non-completed tasks
+    total = len(res)
 
-        todos_url = "https://jsonplaceholder.typicode.com/todos"
-        todos_response = requests.get(todos_url).json()
+    # Number of non-completed tasks
+    non_completed = sum([elem['completed'] is False for elem in res])
 
-        user_todos = [todo for todo in todos_response
-                      if str(todo["userId"]) == user_id]
+    # Number of completed tasks
+    completed = total - non_completed
 
-        completed_tasks = [todo for todo in user_todos if todo["completed"]]
-        total_todos = len(user_todos)
+    # Formatting the expected output
+    str = "Employee {emp_name} is done with tasks({completed}/{total}):"
+    print(str.format(emp_name=name, completed=completed, total=total))
 
-        print(
-            f"Employee {user_name} is done with tasks({len\
-                (completed_tasks)}/{total_todos}):"
-        )
-
-        for todo in completed_tasks:
-            print(f"\t {todo['title']}")
-
-    get_user_info(sys.argv[1])
-
-
-if __name__ == "__main__":
-    main()
+    # Printing completed tasks
+    for elem in res:
+        if elem.get('completed') is True:
+            print('\t', elem.get('title'))
