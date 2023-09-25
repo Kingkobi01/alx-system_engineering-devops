@@ -3,10 +3,22 @@ import pprint
 import requests
 import sys
 
+"""
+Gather data about an employee from an API
+"""
+
 
 def main():
-    def get_user_info(user_id):
+    """
+    ...
+    The Main Engine
+    """
 
+    def get_user_info(user_id):
+        """
+        ...
+        Getting Employees Data
+        """
         user_url = f"https://jsonplaceholder.typicode.com/users/{user_id}"
 
         user_response = requests.get(user_url).json()
@@ -15,8 +27,6 @@ def main():
 
         todos_url = "https://jsonplaceholder.typicode.com/todos"
         todos_response = requests.get(todos_url).json()
-
-        # pprint.pprint(todos_response)
 
         user_todos = [todo for todo in todos_response if str(todo["userId"]) == user_id]
 
@@ -28,7 +38,7 @@ def main():
         )
 
         for todo in completed_tasks:
-            print(f"     {todo['title']}")
+            print(f"\t {todo['title']}")
 
     get_user_info(sys.argv[1])
 
