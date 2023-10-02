@@ -38,8 +38,8 @@ frontend http
 	default_backend web-backend
 
 frontend http_front
-	bind *:433 ssl crt /etc/letsencrypt/live/www.kwabenaboakye.tech/www.kwabenaboakye.tech.pem
-	http-request add-header X-Forwarded-Proto http
+	bind 0.0.0.0:433 ssl crt /etc/letsencrypt/live/www.kwabenaboakye.tech/www.kwabenaboakye.tech.pem
+	http-request add-header X-Forwarded-Proto https
 	http-request redirect scheme https if !{ ssl_fc }
 	use_backend http_back
 
