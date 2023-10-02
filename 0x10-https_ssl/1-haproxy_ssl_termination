@@ -32,19 +32,23 @@ defaults
 	errorfile 502 /etc/haproxy/errors/502.http
 	errorfile 503 /etc/haproxy/errors/503.http
 	errorfile 504 /etc/haproxy/errors/504.http
+frontend http
+	bind *:80
+	mode http
+	default_backend web-backend
 
-frontend  ehoneah-frontend-http
-        bind *:80
-        mode http
-	http-request set-header X-Forwarded-Proto http
-        default_backend ehoneah-backend
+frontend http_front
+	bind *:433 ssl crt /etc/letsencrypt/live/www.kwabenaboakye.tech/www.kwabenaboakye.tech.pem
+	http-request add-header X-Forwarded-Proto http
+	http-request redirect scheme https if !{ ssl_fc }
+	use_backend http_back
 
-frontend ehoneah-frontend-https
-	bind *:443 ssl crt /etc/haproxy/certs/www.ehoneah.tech.pem
-	http-request set-header X-Forwarded-Proto https
-	default_backend ehoneah-backend
+backend http_back
+	redirect scheme https if !{ ssl_fc }
+	server 188703-web-01 34.204.95.7:80
+	server 188703-web-02 54.90.9.192:80
 
-backend ehoneah-backend
-        balance roundrobin
-        server 63210-web-01 100.25.19.204:80 check
-        server 63210-web-02 54.157.159.85:80 check
+backend web-backend
+	balance roundrobin
+	server web1 34.204.95.7:80 check
+	server web2 54.90.9.192:80 check
