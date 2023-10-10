@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 # This program displays the number of subscribers of a subreddit
 
 
