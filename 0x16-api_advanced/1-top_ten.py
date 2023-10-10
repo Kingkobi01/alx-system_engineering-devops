@@ -1,39 +1,43 @@
 #!/usr/bin/python3
+"""Queries the Reddit API and
+prints the titles of the first
+10 hot posts listed for a given
+subreddit.
 """
-This program queries the Reddit API and
-returns the tiles for the top ten posts
-for a given subreddit.
-
-If an invalid subreddit is given,
-the function should return 0.
-"""
-
-
 import requests
 
 
 def top_ten(subreddit):
+    """Prints the titles of the first
+    10 hot posts listed for a given
+    subreddit.
     """
-    Return the number of subreddits if any or return zero
-    """
-    base = "https://www.reddit.com/r/"
-    url = f"{base}{subreddit}/top.json"
+    # Set the Default URL strings
+    base_url = "https://www.reddit.com"
+    api_uri = "{base}/r/{subreddit}/hot.json".format(base=base_url, subreddit=subreddit)
 
-    headers = {"User-Agent": "MyAPI/0.0.1"}
+    # Set an User-Agent
+    user_agent = {"User-Agent": "Python/requests"}
 
-    res = requests.get(url, headers=headers, allow_redirects=False)
+    # Set the Query Strings to Request
+    payload = {"limit": "10"}
 
+    # Get the Response of the Reddit API
+    res = requests.get(
+        api_uri, headers=user_agent, params=payload, allow_redirects=False
+    )
+
+    # Checks if the subreddit is invalid
     if res.status_code in [302, 404]:
-        print(None)
+        print("None")
+    else:
+        res_json = res.json()
 
-    top_ten_posts = [
-        post.get("data")["title"]
-        for post in res.json().get("data").get("children")[:10]
-    ]
+        if res_json.get("data") and res_json.get("data").get("children"):
+            # Get the 10 hot posts of the subreddit
+            hot_posts = res_json.get("data").get("children")
 
-    for title in top_ten_posts:
-        print(title)
-
-
-if __name__ == "__main__":
-    top_ten("python")
+            # Print each hot post title
+            for post in hot_posts:
+                if post.get("data") and post.get("data").get("title"):
+                    print(post.get("data").get("title"))
