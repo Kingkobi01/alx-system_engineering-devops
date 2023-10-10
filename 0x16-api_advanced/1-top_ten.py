@@ -33,3 +33,7 @@ def top_ten(subreddit):
 
     for title in top_ten_posts:
         print(title)
+
+
+if __name__ == "__main__":
+    top_ten("python")
